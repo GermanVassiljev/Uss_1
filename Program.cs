@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +10,7 @@ namespace Uss_1
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(80, 25);
+            Console.SetBufferSize(80, 25);
 
             HorizontalLine upLine = new HorizontalLine(0, 78, 0, '+');
             HorizontalLine downLine = new HorizontalLine(0, 78, 24, '+');
@@ -22,8 +22,8 @@ namespace Uss_1
             rightLine.Drow();
 
             Point p = new Point(4, 5, '*');
-            p.Draw();
-
+            Snake snake = new Snake(p, 4, Direction.RIGHT);
+            snake.Drow();
         }
     }
 }
