@@ -12,20 +12,25 @@ namespace Uss_1
     {
         static void Main(string[] args)
         {
+            // Создание окна
             Console.SetBufferSize(800, 250);
 
+            // Рисовка стен по позиции
             Walls walls = new Walls(80, 25);
             walls.Draw();
 
-            // Отрисовка точек
+            // Создание силуета змейки
             Point p = new Point(4, 5, '*');
             Snake snake = new Snake(p, 4, Direction.RIGHT);
             snake.Draw();
-
+            
+            // Отрисовка еды
             FoodCreator foodCreator = new FoodCreator(80, 25, '$');
             Point food = foodCreator.CreateFood();
             food.Draw();
 
+
+            // бесконечный цикл с условиями столкновенния змеи с чем либо
             while (true)
             {
                 if (walls.IsHit(snake) || snake.IsHitTail())
@@ -43,21 +48,21 @@ namespace Uss_1
                 }
 
                 Thread.Sleep(100);
-                if (Console.KeyAvailable)
+                if (Console.KeyAvailable) // Условия управления змейкой
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.HandleKey(key.Key);
                 }
             }
-            WriteGameOver();
+            WriteGameOver(); //Конец игры
             Console.ReadLine();
         }
 
-        static void WriteGameOver()
+        static void WriteGameOver() // Подробности конца игры
         {
             int xOffset = 25;
             int yOffset = 8;
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Red; // Цвет написанного
             Console.SetCursorPosition(xOffset, yOffset++);
             WriteText("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=", xOffset, yOffset++);
             WriteText("     G A M E   O V E R", xOffset + 1, yOffset++);

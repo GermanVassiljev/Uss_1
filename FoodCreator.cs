@@ -21,7 +21,7 @@ namespace Uss_1
             this.sym = sym;
         }
 
-        public Point CreateFood()
+        public Point CreateFood() // Генерация еды в случайной точке
         {
             int x = random.Next(2, mapWidth - 2);
             int y = random.Next(2, mapHeight - 2);

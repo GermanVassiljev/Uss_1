@@ -37,7 +37,7 @@ namespace Uss_1
             return false;
         }
 
-        public void Draw()
+        public void Draw() //Рисует стену из списка
         {
             foreach (var wall in wallList)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Uss_1
 {
-    enum Direction
+    enum Direction // Перечисления направлений
     {
         LEFT,
         RIGHT,

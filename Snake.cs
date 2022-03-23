@@ -9,6 +9,7 @@ namespace Uss_1
     class Snake : Figure
     {
         Direction direction;
+        int score = 9;
 
         public Snake(Point tail, int length, Direction _direction)
         {
@@ -22,7 +23,7 @@ namespace Uss_1
             }
         }
 
-        internal void Move()
+        internal void Move() // Добавление головы и удаление хвоста при движении
         {
             Point tail = pList.First();
             pList.Remove(tail);
@@ -33,7 +34,7 @@ namespace Uss_1
             head.Draw();
         }
 
-        public Point GetNextPoint()
+        public Point GetNextPoint() // Увеличение змеи при взятии очка
         {
             Point head = pList.Last();
             Point nextPoint = new Point(head);
@@ -52,7 +53,7 @@ namespace Uss_1
             return false;
         }
 
-        public void HandleKey(ConsoleKey key)
+        public void HandleKey(ConsoleKey key) // Смотр клавишь управления и присваивание их direction
         {
             if (key == ConsoleKey.LeftArrow)
                 direction = Direction.LEFT;
@@ -64,13 +65,33 @@ namespace Uss_1
                 direction = Direction.UP;
         }
 
-        internal bool Eat(Point food)
+        internal bool Eat(Point food)//Регистрация удара головы с едой
         {
             Point head = GetNextPoint();
             if (head.IsHit(food))
             {
+                //Комментарии при достижении определённого счёта
+                score++;
+                Console.SetCursorPosition(70, 23);
+                Console.WriteLine($"Score: {score}");
                 food.sym = head.sym;
                 pList.Add(food);
+                if (score==10)
+                {
+                    Console.SetCursorPosition(35, 11);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Well done");
+                }
+                else if(score==20)
+                {
+                    Console.SetCursorPosition(35, 20);
+                    Console.WriteLine("Cool!");
+                }
+                else if (score==50)
+                {
+                    Console.SetCursorPosition(35, 11);
+                    Console.WriteLine("Rock&Roll");
+                }
                 return true;
             }
             else
@@ -80,3 +101,4 @@ namespace Uss_1
         }
     }
 }
+
